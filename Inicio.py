@@ -44,6 +44,30 @@ encoded_image_GWA_center = base64.b64encode(open(image_filename_GWA_center, 'rb'
 image_filename_rapa_nui = 'RapaNui.png'
 encoded_image_rapa_nui = base64.b64encode(open(image_filename_rapa_nui, 'rb').read()).decode('ascii')
 
+
+fig = go.Figure(go.Scattergeo(lat=[-27.16], lon=[-109.43]))
+fig.update_geos(projection_type="orthographic", projection_rotation=dict(lon=-80, lat=-30), bgcolor='rgba(0,0,0,0)',
+                lataxis_showgrid=True, lonaxis_showgrid=True
+                
+                  )
+fig.update_layout(height=200, margin={"r":0,"t":0,"l":0,"b":0}, 
+                  plot_bgcolor='#f6f6f6',
+            paper_bgcolor='#f6f6f6')
+
+
+
+fig2 = go.Figure(go.Scattergeo(lat=[-30.169], lon=[-70.804]))
+fig2.update_geos(projection_type="orthographic", projection_rotation=dict(lon=-80, lat=-30), bgcolor='rgba(0,0,0,0)',
+                lataxis_showgrid=True, lonaxis_showgrid=True
+                
+                  )
+fig2.update_layout(height=200, margin={"r":0,"t":0,"l":0,"b":0}, 
+                  plot_bgcolor='#f6f6f6',
+            paper_bgcolor='#f6f6f6')
+
+
+
+
 ###############diccionario con fechas##########################################
 
 app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
@@ -51,7 +75,7 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = html.Div([
 ################################### Configuración Encabezado Página Web##############    
     html.Div([
-        html.Div([html.H2("Title", style={'font-size':'18pt','color': 'white','font-family': 'Abel', 'font-weight': '200 !important', 'margin-top': '28px', 'margin-left':'10px'})], style={'position':'absolute','display': 'inline-block'}),
+        html.Div([html.H2("WAYRA", style={'font-size':'18pt','color': 'white','font-family': 'Abel', 'font-weight': '200 !important', 'margin-top': '28px', 'margin-left':'10px'})], style={'position':'absolute','display': 'inline-block'}),
              html.A([       
              html.Img(src='data:image/png;base64,{}'.format(encoded_image_cr2), style={'height':'80px'})],href = 'http://www.cr2.cl/', style={'margin-left': '400px', 'position':'absolute'}),
              html.A([     
@@ -133,10 +157,11 @@ def Web_Language(Switch_Lang):
             style={'color': 'black', 'width':'60%','fontFamily': '"Times New Roman"'
                                                     ,'backgroundColor': '#f6f6f6', 'display': 'inline-block', 'margin-top':'50px', 'border-right': '2px solid #0668a1'}),
                               html.Div([
-                                  html.H2(dcc.Link("Rapa Nui Dashboard",href = 'https://rapanui.wayra.cr2.cl/' ), style={'margin-left':'10px',
+                                  html.H2(html.A("Rapa Nui Dashboard",href = 'https://rapanui.wayra.cr2.cl/' ), style={'margin-left':'10px',
                                                                                      'text-align': 'center','font-family': 'Abel','font-size': '22px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
-                                  html.A([       
-             html.Img(src='data:image/png;base64,{}'.format(encoded_image_rapa_nui), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '50px'}),
+#                                  html.A([       
+#             html.Img(src='data:image/png;base64,{}'.format(encoded_image_rapa_nui), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '50px'}),
+                                  dcc.Graph(figure=fig),
                                   
                                   dcc.Markdown(
                                       dedent(f'''
@@ -146,11 +171,12 @@ def Web_Language(Switch_Lang):
                                              ''')
                                       )
                                       ,
-                                    html.H2(dcc.Link("Tololo Dashboard", href='https://tololo.wayra.cr2.cl/') ,style={'margin-left':'10px',
+                                    html.H2(html.A("Tololo Dashboard", href='https://tololo.wayra.cr2.cl/') ,style={'margin-left':'10px',
                                                                                      'text-align': 'center','font-family': 'Abel','font-size': '22px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
-                                   html.A([       
-             html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '20px'}) 
-                                  ,  
+#                                   html.A([       
+#             html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), style={'height':'300px'})],href = 'https://tololo.wayra.cr2.cl/', style={'margin-left': '20px'}) ,
+                                  dcc.Graph(figure=fig2),
+                                   
                                   dcc.Markdown(
                                       dedent(f'''
                                              
@@ -221,10 +247,11 @@ def Web_Language(Switch_Lang):
             style={'color': 'black', 'width':'60%','fontFamily': '"Times New Roman"'
                                                     ,'backgroundColor': '#f6f6f6', 'display': 'inline-block', 'margin-top':'50px', 'border-right': '2px solid #0668a1'}),
                               html.Div([
-                                  html.H2(dcc.Link("Rapa Nui Dashboard",href = 'https://rapanui.wayra.cr2.cl/' ), style={'margin-left':'10px',
+                                  html.H2(html.A("Rapa Nui Dashboard",href = 'https://rapanui.wayra.cr2.cl/' ), style={'margin-left':'10px',
                                                                                      'text-align': 'center','font-family': 'Abel','font-size': '22px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
-                                  html.A([       
-             html.Img(src='data:image/png;base64,{}'.format(encoded_image_rapa_nui), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '50px'}),
+#                                  html.A([       
+#             html.Img(src='data:image/png;base64,{}'.format(encoded_image_rapa_nui), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '50px'}),
+                                  dcc.Graph(figure=fig),
                                   
                                   dcc.Markdown(
                                       dedent(f'''
@@ -234,11 +261,12 @@ def Web_Language(Switch_Lang):
                                              ''')
                                       )
                                       ,
-                                    html.H2(dcc.Link("Tololo Dashboard", href='https://tololo.wayra.cr2.cl/') ,style={'margin-left':'10px',
+                                    html.H2(html.A("Tololo Dashboard", href='https://tololo.wayra.cr2.cl/') ,style={'margin-left':'10px',
                                                                                      'text-align': 'center','font-family': 'Abel','font-size': '22px','color': '#0668a1','backgroundColor': '#f6f6f6'}),
-                                   html.A([       
-             html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), style={'height':'300px'})],href = 'https://rapanui.wayra.cr2.cl/', style={'margin-left': '20px'}) 
-                                  ,  
+#                                   html.A([       
+#             html.Img(src='data:image/png;base64,{}'.format(encoded_image_tololo), style={'height':'300px'})],href = 'https://tololo.wayra.cr2.cl/', style={'margin-left': '20px'}) ,
+                                  dcc.Graph(figure=fig2),
+
                                   dcc.Markdown(
                                       dedent(f'''
                                              
